@@ -1,0 +1,698 @@
+/* ------------------------- Variables -------------------------------------------------- */
+
+:root {
+  /* CSS Animations */
+  --animation-default-fast: 0.25s cubic-bezier(0.625, 0.05, 0, 1);
+  --animation-default: 0.5s cubic-bezier(0.625, 0.05, 0, 1);
+  
+  /* RGB */
+  --color-rgb-dark: 18, 18, 18;
+  --color-rgb-light: 243, 236, 210;
+}
+
+/* Tablet */
+@media screen and (max-width: 991px) {
+	:root {
+	  --section-padding: 8em;
+	  --container-padding: 3em;
+	}
+}
+
+/* Mobile Landscape */
+@media screen and (max-width: 767px) {
+	:root {
+	 --section-padding: 6em;
+	  --container-padding: 1em;
+	}
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 479px) {
+	:root {
+	  
+	}
+}
+
+/* ------------------------- Copy/Paste Media Queries -------------------------------------------------- */
+
+@media screen and (max-width: 991px) {}
+@media screen and (max-width: 767px) {}
+@media screen and (max-width: 479px) {}
+
+@media screen and (min-width: 992px) {}
+@media screen and (min-width: 768px) {}
+@media screen and (min-width: 480px) {}
+
+@media (hover: hover) and (pointer: fine) {}
+@media (hover: none) and (pointer: coarse) {}
+
+:is(.wf-design-mode, .w-editor) {}
+
+/* ------------------------- Scaling System made by Dennis Snellenberg -------------------------------------------------- */
+
+/* Desktop */
+:root {
+  --size-unit: 16; /* body font-size in design - no px */
+  --size-container-ideal: 1440; /* screen-size in design - no px */
+  --size-container-min: 992px;
+  --size-container-max: 1920px;
+  --size-container: clamp(var(--size-container-min), 100vw, var(--size-container-max));
+  --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
+}
+
+/* Tablet */
+@media screen and (max-width: 991px) {
+	:root {
+    --size-container-ideal: 834; /* screen-size in design - no px */
+    --size-container-min: 768px;
+    --size-container-max: 991px;
+	}
+}
+
+/* Mobile Landscape */
+@media screen and (max-width: 767px) {
+	:root {
+    --size-container-ideal: 390; /* screen-size in design - no px */
+    --size-container-min: 480px;
+    --size-container-max: 767px;
+	}
+}
+
+/* Mobile Portrait */
+@media screen and (max-width: 479px) {
+	:root {
+    --size-container-ideal: 390; /* screen-size in design - no px */
+    --size-container-min: 320px;
+    --size-container-max: 479px;
+	}
+}
+
+/* ------------------------- Viewportheight -------------------------------------------------- */
+
+:root {
+  --vh-in-px: 8px; /* Default fallback */
+  --vh: var(--vh-in-px);
+  --dvh: var(--vh); /* Same as original VH */
+  --svh: var(--vh);
+  --lvh: var(--vh);
+}
+
+/* Only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --vh: 1vh;
+  }
+
+  /* If the device supports svh and lvh */
+  @supports (height: 1svh) {
+    :root {
+      --vh: 1vh; /* Viewport height */
+      --dvh: 1dvh; /* Dynamic viewport height */
+      --svh: 1svh; /* Small viewport height */
+      --lvh: 1lvh; /* Large viewport height */
+    }
+  }
+}
+
+/* Only on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Set vh to dvh initially */
+  :root {
+    --vh: var(--vh-in-px);
+  }
+  
+  /* If the device supports lvh */
+  @supports (height: 1lvh) {
+    :root {
+      --dvh: 1dvh; /* Dynamic viewport height */
+      --svh: 1svh; /* Small viewport height */
+      --lvh: 1lvh; /* Large viewport height */
+    }
+  }
+}
+
+/* ------------------------- Lenis -------------------------------------------------- */
+
+html.lenis {height: auto;}
+.lenis.lenis-smooth {scroll-behavior: auto; height: 100vh;}
+.lenis.lenis-smooth [data-lenis-prevent] {overscroll-behavior: contain;}
+.lenis.lenis-stopped {overflow: hidden;}
+.lenis.lenis-scrolling iframe {pointer-events: none;}
+
+/* ------------------------- Hide Scrollbar -------------------------------------------------- */
+
+body ::-webkit-scrollbar, body::-webkit-scrollbar{display: none;} /* Chrome, Safari, Opera */
+body {-ms-overflow-style: none;} /* IE & Edge */
+html {scrollbar-width: none;} /* Firefox */
+
+/* ------------------------- Cursor -------------------------------------------------- */
+
+/* Default cursor */
+body.is--cursor,
+body.is--cursor *,
+body.is--cursor *.is--cursor-default {
+  cursor: url("../../assets/static/682510013bf56c1de91cc6b6_cursor-default%25402x.svg") 2 0, auto;
+}
+
+/* Text cursor */
+body.is--cursor p,
+body.is--cursor p span,
+body.is--cursor h1,
+body.is--cursor h2,
+body.is--cursor h3,
+body.is--cursor h4,
+body.is--cursor h5,
+body.is--cursor h6,
+body.is--cursor input[type="text"],
+body.is--cursor input[type="email"],
+body.is--cursor textarea,
+body.is--cursor [data-text] {
+  cursor: url("../../assets/static/68251000735e1ffa3cdf5fdd_cursor-text%25402x.svg") 9 19, text;
+}
+
+/* Hover cursor */
+body.is--cursor a,
+body.is--cursor a *,
+body.is--cursor a p,
+body.is--cursor button,
+body.is--cursor button *,
+body.is--cursor input[type="submit"],
+body.is--cursor input[type="submit"] *,
+body.is--cursor input[type="button"],
+body.is--cursor input[type="button"] *,
+body.is--cursor [data-submit],
+body.is--cursor [data-submit] *,
+body.is--cursor [data-hover],
+body.is--cursor [data-hover] *,
+body.is--cursor [data-anchor-target],
+body.is--cursor input[type="radio"],
+body.is--cursor input[type="checkbox"],
+body.is--cursor select {
+  cursor: url("../../assets/static/682510005ac62e3f220e8f48_cursor-pointer%25402x.svg") 12 0, pointer;
+}
+
+body.is--cursor [data-stacked-cards-card]:hover {
+  cursor: url("../../assets/static/682510005ec432b477998dfa_cursor-drag%25402x.svg") 12 4, grab !important;
+}
+
+body.is--cursor [data-stacked-cards-card].is--dragging {
+  cursor: url("../../assets/static/68251003abf43ec93b796138_cursor-grabbing%25402x.svg") 12 0, grabbing !important;
+}
+
+body.is--cursor * .speaker-card[data-sticky-cursor] *,
+body.is--cursor * [data-sticky-cursor]:hover * {
+  cursor: url("../../assets/static/682c2e913650a5ebc242ebfa_cursor-pointer-transparent.svg") 8 0, auto;
+}
+
+
+/* ------------------------- Body -------------------------------------------------- */
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+li, ul, figure { padding: 0; margin: 0; list-style: none;}
+
+html {
+  scroll-behavior: initial;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  text-shadow: none;
+}
+
+/* General */
+canvas, img, video, picture, figure {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  display: block;
+}
+
+img {
+  width: 100%;
+}
+
+svg {
+  max-width: none;
+  height: auto;
+  box-sizing: border-box;
+}
+
+audio, canvas, iframe, img, svg, video, picture, figure {
+  vertical-align: middle;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, ul, ol, span, strong, em, figcaption  {padding: 0; margin: 0;}
+
+video {
+  padding: 0 !important;
+  outline: 0 solid transparent !important;
+  box-shadow: none !important;
+}
+
+/* ------------------------- Font Sizes -------------------------------------------------- */
+
+h1, .h1 {
+  font-size: 5.5em;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+}
+
+h2, .h2 {
+  font-size: 3em;
+  line-height: 1.3;
+}
+
+h3, .h3 {
+  font-size: 2em;
+  line-height: 1.3;
+}
+
+h4, .h4 {
+  font-size: 1.5em;
+  line-height: 1.3;
+}
+
+h5, .h5 {
+  font-size: 1em;
+  line-height: 1.3;
+}
+
+@media screen and (max-width: 991px) {}
+@media screen and (max-width: 767px) {}
+@media screen and (max-width: 479px) {}
+
+/* ------------------------- Loading -------------------------------------------------- */
+
+:is(.wf-design-mode, .w-editor) .loading-container {
+  display: none;
+}
+
+/* ------------------------- Navigation -------------------------------------------------- */
+
+/*.nav-bar {*/
+/*  transition: box-shadow 0.5s ease;*/
+/*}*/
+
+
+/*[data-scrolling-started="true"] .nav-bar {*/
+/*  box-shadow: 0 .5em 0 0 rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/* ------------------------- Underline Link -------------------------------------------------- */
+
+.underline-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0em;
+  left: 0;
+  width: 100%;
+  height: 0.125em;
+  background-color: var(--color-dark);
+  transition: transform var(--animation-default);
+  transform-origin: right;
+  transform: scaleX(0) rotate(0.001deg);
+  border-radius: 0.125em;
+}
+
+.underline-link:hover::before {
+  transform-origin: left;
+  transform: scaleX(1) rotate(0.001deg);
+}
+
+/* ------------------------- Button -------------------------------------------------- */
+
+.btn,
+.newsletter__submit {
+  transition: all var(--animation-default-fast);
+  transform: translateY(0em) rotate(0.001deg);
+}
+
+.btn:hover,
+.newsletter__submit:hover {
+  transform: translateY(0.25em) rotate(0.001deg);
+  box-shadow: 0em 0em 0em 0em rgba(0, 0, 0, 0.5);
+}
+
+/* ------------------------- Sun -------------------------------------------------- */
+
+/* CSS Keyframe Animation */
+@keyframes rotateSun { 
+  to {
+    transform: rotate(9deg);
+  }
+}
+
+.sun__sun-svg {
+  animation: rotateSun 0.5s linear infinite;
+}
+
+.sun__face-svg > *:nth-child(4),
+.sun:hover .sun__face-svg > *:nth-child(1){
+  opacity: 0;
+}
+
+.sun__face-svg > *:nth-child(1),
+.sun:hover .sun__face-svg > *:nth-child(4) {
+  opacity: 1;
+}
+
+.sun__face-svg > *:nth-child(5),
+.sun__face-svg > *:nth-child(6),
+body:has([data-hover-sun-happy]:hover) .sun__face-svg > *:nth-child(3) {
+  opacity: 0;
+}
+
+.sun__face-svg > *:nth-child(3),
+body:has([data-hover-sun-happy]:hover) .sun__face-svg > *:nth-child(5),
+body:has([data-hover-sun-happy]:hover) .sun__face-svg > *:nth-child(6){
+  opacity: 1;
+}
+
+.sunny-fixed .sun,
+.sunny-fixed .chat-cloud {
+  pointer-events: all;
+}
+
+.sunny-fixed .sun-chat-combo {
+  pointer-events: none;
+}
+
+.sunny-fixed .sun-chat-combo:hover {
+  pointer-events: all;
+}
+
+:is(.wf-design-mode, .w-editor) .sunny-fixed {
+  display: none;
+}
+
+/* ------------------------- Welcome Heading -------------------------------------------------- */
+
+.welcome__h1 span {
+  position: relative;
+  transform: rotate(0.001deg)
+}
+
+.welcome__h1 span > span {
+  color: transparent;
+}
+
+.welcome__h1 span > svg {
+  position: absolute;
+  width: calc(100% + 0.25em);
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.welcome__h1 span:nth-child(2) > svg {
+  transform: translate(-50%, -50%);
+}
+
+.welcome__h1 span:nth-child(4) > svg {
+  transform: translate(-50%, -50%);
+}
+
+.welcome__h1 span:nth-child(5) > svg {
+  transform: translate(-50%, -48%);
+}
+
+.welcome__h1 span > svg:nth-child(1) {
+  transition: opacity var(--animation-default-fast);
+  top: calc(50% + 0.1em);
+  opacity: 0.15;
+}
+
+.welcome__h1 span:hover > svg:nth-child(1) {
+  opacity: 0.3;
+}
+
+.welcome__h1 span > svg:nth-child(1) * {
+  fill: var(--color-dark);
+}
+
+.welcome__h1 span > svg:nth-child(2) {
+  transition: top var(--animation-default-fast);
+  top: calc(50% + 0em);
+}
+
+.welcome__h1 span:hover > svg:nth-child(2) {
+  top: calc(50% + 0.05em);
+}
+
+@media screen and (max-width: 767px) {
+  
+  .welcome__h1 > span {
+    margin-top: -0.00625em;
+  }
+}
+
+
+/* ------------------------- Stacked Cards -------------------------------------------------- */
+
+.stack-cards__card {
+  transition: box-shadow var(--animation-default-fast);
+  box-shadow: 0em 0.5em 0em 0em rgba(0, 0, 0, 0);
+}
+
+.stack-cards__item.is--active .stack-cards__card,
+.stack-cards__item.is--second .stack-cards__card {
+  box-shadow: 0em 0.5em 0em 0em rgba(0, 0, 0, 0.15);
+}
+
+:is(.wf-design-mode, .w-editor) [data-stacked-cards-item]:nth-child(1) {
+  transform: rotate(3deg);
+  z-index: 3;
+}
+
+:is(.wf-design-mode, .w-editor) [data-stacked-cards-item]:nth-child(2) {
+  transform: rotate(-3deg);
+  z-index: 2;
+}
+
+:is(.wf-design-mode, .w-editor) .rainbox-sides {
+  position: absolute;
+}
+
+
+/* ------------------------- CSS Marquee (Osmo)  -------------------------------------------------- */
+
+/* CSS Keyframe Animation */
+@keyframes translateX { 
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+[data-css-marquee-list] {
+  animation: translateX 30s linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+/* ------------------------- Community -------------------------------------------------- */
+
+.community-card {
+  transition: transform var(--animation-default);
+  transform: rotate(0.001deg);
+}
+
+.community-card:hover {
+  transform: rotate(3deg);
+}
+
+.community__grid-col:nth-child(odd) .community-card:hover {
+  transform: rotate(-3deg);
+}
+
+/* ------------------------- Tweets -------------------------------------------------- */
+
+.tweets .tweets__content > *:nth-child(1) .tweet-card {transform: rotate(4deg);}
+.tweets .tweets__content > *:nth-child(2) .tweet-card {transform: rotate(2deg);}
+.tweets .tweets__content > *:nth-child(3) .tweet-card {transform: rotate(0deg);}
+.tweets .tweets__content > *:nth-child(4) .tweet-card {transform: rotate(-2deg);}
+.tweets .tweets__content > *:nth-child(5) .tweet-card {transform: rotate(-4deg);}
+
+
+/* ------------------------- Accordion -------------------------------------------------- */
+
+/* Animate Accordion Bottom Grid */
+.accordion-css__item-bottom {
+  transition: grid-template-rows var(--animation-default);
+}
+
+[data-accordion-status="active"] .accordion-css__item-bottom,
+:is(.wf-design-mode, .w-editor) [data-accordion-status] .accordion-css__item-bottom {
+  grid-template-rows: 1fr;
+}
+
+/* Animate Icon */
+.accordion-css__item-icon {
+  transition: transform var(--animation-default);
+}
+
+[data-accordion-status="active"] .accordion-css__item-icon,
+:is(.wf-design-mode, .w-editor) [data-accordion-status] .accordion-css__item-ico {
+  transform: rotate(-135deg);
+}
+.accordion-css__card p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-css__bg-svg path {
+  fill: var(--color-mango);
+  fill: #FFAE1C;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-accordion-status] .accordion-css__item-icon .accordion-css__item-icon-svg {
+    transition: transform var(--animation-default);
+    transform: rotate(0.001deg);
+  }
+  
+  [data-accordion-status]:has(.accordion-css__item-top:hover) .accordion-css__item-icon .accordion-css__item-icon-svg {
+    transform: rotate(90deg);
+  }
+  
+  [data-accordion-status] .accordion-css__item-bottom-content {
+    transition: transform var(--animation-default);
+    transform: translateY(0em) rotate(0.001deg);
+  }
+  
+  [data-accordion-status]:has(.accordion-css__item-top:hover) .accordion-css__item-bottom-content {
+    transform: translateY(-0.875em) rotate(1deg);
+  }
+  
+  [data-accordion-status="active"]:has(.accordion-css__item-top:hover) .accordion-css__item-bottom-content {
+    transform: translateY(0.5em) rotate(0.001deg);
+  }
+}
+
+/* ------------------------- Prefooter -------------------------------------------------- */
+
+
+.prefooter__wave path {
+  vector-effect: non-scaling-stroke;
+  stroke: var(--color-dark);
+  stroke-width: 0.125em;
+}
+
+/* ------------------------- Rotate circle  -------------------------------------------------- */
+
+.rotate-circle__list .rotate-circle__item:nth-child(1) {transform: rotate(-65deg);}
+.rotate-circle__list .rotate-circle__item:nth-child(2) {transform: rotate(-19deg);}
+.rotate-circle__list .rotate-circle__item:nth-child(3) {transform: rotate(19deg);}
+.rotate-circle__list .rotate-circle__item:nth-child(4) {transform: rotate(65deg);}
+
+.rotate-circle__list .rotate-circle__item:nth-child(1) .rotate-circle__image-wrap {transform: rotate(65deg);}
+.rotate-circle__list .rotate-circle__item:nth-child(2) .rotate-circle__image-wrap {transform: rotate(19deg);}
+.rotate-circle__list .rotate-circle__item:nth-child(3) .rotate-circle__image-wrap {transform: rotate(-19deg);}
+.rotate-circle__list .rotate-circle__item:nth-child(4) .rotate-circle__image-wrap {transform: rotate(-65deg);}
+
+.rotate-circle__list .rotate-circle__item:nth-child(1) .rotate-circle__image {border-color: var(--color-orange);}
+.rotate-circle__list .rotate-circle__item:nth-child(2) .rotate-circle__image {border-color: var(--color-mango);}
+.rotate-circle__list .rotate-circle__item:nth-child(4) .rotate-circle__image {border-color: var(--color-yellow);}
+
+
+.rotate.is--flipped .rotate-circle__image-img {
+  transform: rotate(180deg);
+}
+
+@media screen and (max-width: 991px) {
+	.rotate-circle__list .rotate-circle__item:nth-child(1) {transform: rotate(155deg);}
+  .rotate-circle__list .rotate-circle__item:nth-child(2) {transform: rotate(109deg);}
+  .rotate-circle__list .rotate-circle__item:nth-child(3) {transform: rotate(71deg);}
+  .rotate-circle__list .rotate-circle__item:nth-child(4) {transform: rotate(25deg);}
+  
+  .rotate-circle__list .rotate-circle__item:nth-child(1) .rotate-circle__image-wrap {transform: rotate(-155deg);}
+  .rotate-circle__list .rotate-circle__item:nth-child(2) .rotate-circle__image-wrap {transform: rotate(-109deg);}
+  .rotate-circle__list .rotate-circle__item:nth-child(3) .rotate-circle__image-wrap {transform: rotate(-71deg);}
+  .rotate-circle__list .rotate-circle__item:nth-child(4) .rotate-circle__image-wrap {transform: rotate(-25deg);}
+}
+
+/* ------------------------- YouTube Modal -------------------------------------------------- */
+
+:is(.wf-design-mode, .w-editor) .modal-yt {
+  display: none;
+}
+
+.modal-yt__card {
+  transition: var(--animation-default);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.5) rotate(-5deg);
+}
+
+[data-yt-modal-status="active"] .modal-yt__card {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) rotate(0.001deg);
+}
+
+.modal-yt__bg {
+  transition: var(--animation-default);
+  opacity: 0;
+  visibility: hidden;
+}
+
+[data-yt-modal-status="active"] .modal-yt__bg {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-yt .btn {
+  transition: transform var(--animation-default);
+  transform: scale(0) rotate(-5deg);
+}
+
+[data-yt-modal-status="active"] .modal-yt .btn {
+  transform: scale(1) rotate(-5deg);
+}
+
+
+/* ------------------------- Expect Cards -------------------------------------------------- */
+
+.expect-item .expect-card {
+  transition: var(--animation-default-fast) 0.05s;
+  opacity: 0;
+  visibility: hidden;
+  transform: rotate(0.001deg) scale(0.75);
+}
+
+.expect-item:hover .expect-card,
+:is(.wf-design-mode, .w-editor) .expect-item .expect-card {
+  opacity: 1;
+  visibility: visible;
+  transform: rotate(-5deg) scale(1);
+}
+
+.expect-item .expect-card.is--even {
+  transform: rotate(0.001deg) scale(0.75);
+}
+
+.expect-item:hover .expect-card.is--even,
+:is(.wf-design-mode, .w-editor) .expect-item .expect-card.is--even{
+  transform: rotate(5deg) scale(1);
+}
+

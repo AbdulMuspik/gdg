@@ -1,0 +1,14 @@
+{
+  "name": "gdg-vanilla-vite",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build:copy-assets",
+    "build:copy-assets": "node scripts/copy-assets.js",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.21"
+  }
+}

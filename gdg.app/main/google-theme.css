@@ -1,0 +1,344 @@
+/* ========================================================================================= 
+   GOOGLE DESIGN THEME - Color Palette & Typography
+   ========================================================================================= */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Google Material Design Color Palette */
+:root {
+  /* Google Brand Colors */
+  --google-blue: #4285F4;
+  --google-red: #EA4335;
+  --google-yellow: #FBBC04;
+  --google-green: #34A853;
+  
+  /* Neutral Backgrounds */
+  --google-white: #FFFFFF;
+  --google-gray-50: #F8F9FA;
+  --google-gray-100: #E8EAED;
+  --google-gray-200: #DADCE0;
+  --google-gray-300: #BDC1C6;
+  --google-gray-400: #9AA0A6;
+  --google-gray-500: #80868B;
+  --google-gray-600: #5F6368;
+  --google-gray-700: #3C4043;
+  --google-gray-800: #202124;
+  --google-gray-900: #171717;
+  
+  /* Override existing color variables with Google colors */
+  --color-light: var(--google-white);
+  --color-light-plus: var(--google-gray-50);
+  --color-dark: var(--google-gray-800);
+  --color-white: var(--google-white);
+  --color-black: var(--google-gray-900);
+  
+  /* Replace old brand colors with Google colors */
+  --color-pink: var(--google-red);
+  --color-mango: var(--google-yellow);
+  --color-orange: var(--google-blue);
+  --color-yellow: var(--google-yellow);
+  --color-primary: var(--google-blue);
+  
+  /* Material Design Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+  --shadow-md: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+  --shadow-lg: 0 2px 6px 2px rgba(60,64,67,.3), 0 8px 16px 6px rgba(60,64,67,.15);
+}
+
+/* ========================================================================================= 
+   TYPOGRAPHY - Google Sans & Roboto
+   ========================================================================================= */
+
+/* Apply Google Sans to headings */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.welcome__h1,
+.welcome__h2,
+.h2__boxed,
+.nav-logo,
+.btn {
+  font-family: 'Google Sans', 'Product Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+}
+
+/* Apply Roboto to body text */
+body,
+p,
+.underline-link,
+.speaker-card__name,
+.speaker-card__role,
+.community-card__text,
+.tweet-card__text,
+.accordion-css__item-text,
+.footer__text {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-weight: 400;
+}
+
+/* Adjust font weights for better Google aesthetic */
+h1, .h1, .welcome__h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2, .h2, .welcome__h2 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+h3, .h3 {
+  font-weight: 500;
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+  font-weight: 500;
+}
+
+/* Body text - lighter weight for better readability */
+body {
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Strong/bold text */
+strong, b {
+  font-weight: 500;
+}
+
+/* ========================================================================================= 
+   COLOR APPLICATIONS
+   ========================================================================================= */
+
+/* Background colors */
+body,
+.main,
+.loading-screen,
+.nav-bar,
+.speakers,
+.footer {
+  background-color: var(--google-white);
+}
+
+/* Light gray backgrounds for cards and sections */
+.btn.is--cards-btn,
+.btn.is--light,
+.btn.is--close,
+.speaker-card__image,
+.speaker-card__info,
+.speaker-card__cursor-text,
+.expect-card,
+.community-card,
+.tweet-card,
+.accordion-css__card {
+  background-color: var(--google-gray-50);
+}
+
+/* Primary action buttons - Google Blue */
+.btn {
+  background-color: var(--google-blue);
+  color: var(--google-white);
+  border-color: var(--google-blue);
+  transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.btn:hover {
+  background-color: #1a73e8;
+  box-shadow: var(--shadow-md);
+  transform: translateY(0);
+}
+
+/* Secondary buttons */
+.btn.is--light,
+.btn.is--cards-btn {
+  background-color: var(--google-white);
+  color: var(--google-blue);
+  border-color: var(--google-gray-300);
+}
+
+.btn.is--light:hover,
+.btn.is--cards-btn:hover {
+  background-color: var(--google-gray-50);
+  border-color: var(--google-blue);
+}
+
+/* Accent sections */
+.logo-marquee {
+  background-color: var(--google-yellow);
+  border-top-color: var(--google-gray-300);
+  border-bottom-color: var(--google-gray-300);
+  color: var(--google-gray-800);
+}
+
+.about {
+  background-color: var(--google-gray-800);
+  border-bottom-color: var(--google-gray-700);
+}
+
+.about__tile {
+  color: var(--google-white);
+}
+
+/* Boxed headings with Google colors */
+.h2__boxed {
+  background-color: var(--google-blue);
+  color: var(--google-white);
+  border-color: var(--google-blue);
+}
+
+.h2__boxed.is--bottom {
+  background-color: var(--google-red);
+  border-color: var(--google-red);
+}
+
+.h2__boxed.is--faq {
+  background-color: var(--google-green);
+  border-color: var(--google-green);
+}
+
+.welcome__h2-box {
+  background-color: var(--google-yellow);
+  border-color: var(--google-gray-300);
+  color: var(--google-gray-800);
+}
+
+/* Chat cloud / callouts */
+.chat-cloud {
+  background-color: var(--google-blue);
+  color: var(--google-white);
+  border-color: var(--google-blue);
+}
+
+/* Speaker cards cursor */
+.speakers-card__cursor {
+  background-color: var(--google-red);
+  color: var(--google-white);
+}
+
+/* Text colors */
+.underline-link,
+body,
+.nav-bar__li {
+  color: var(--google-gray-800);
+}
+
+.welcome__h2 {
+  color: var(--google-white);
+}
+
+/* Borders - softer gray */
+.nav-bar,
+.stack-cards__card,
+.speaker-card__image,
+.speaker-card__info,
+.logo-marquee,
+.about,
+.speakers__grid-line {
+  border-color: var(--google-gray-300);
+}
+
+/* Divider lines */
+.divider {
+  background-color: var(--google-gray-200);
+}
+
+/* Focus states */
+.is-focused {
+  background-color: var(--google-gray-50);
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--google-blue);
+  color: var(--google-white);
+}
+
+::-moz-selection {
+  background-color: var(--google-blue);
+  color: var(--google-white);
+}
+
+/* ========================================================================================= 
+   MATERIAL DESIGN ENHANCEMENTS
+   ========================================================================================= */
+
+/* Add subtle shadows to cards */
+.stack-cards__card,
+.speaker-card,
+.community-card,
+.tweet-card,
+.expect-card,
+.accordion-css__card {
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.stack-cards__card:hover,
+.speaker-card:hover,
+.community-card:hover,
+.tweet-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Navigation bar shadow on scroll */
+[data-scrolling-started="true"] .nav-bar {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Smooth transitions with Material Design easing */
+.btn,
+.underline-link,
+.speaker-card,
+.community-card,
+.nav-bar {
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* ========================================================================================= 
+   SVG FILLS - Update rainbow/sun colors to Google palette
+   ========================================================================================= */
+
+/* Update SVG fills to use Google colors */
+svg path[fill="#F3ECD2"],
+svg path[fill="var(--color-light)"] {
+  fill: var(--google-white);
+}
+
+svg path[fill="var(--color-dark)"],
+svg path[fill="#121212"] {
+  fill: var(--google-gray-800);
+}
+
+svg path[fill="var(--color-light-plus)"],
+svg path[fill="#fffefb"] {
+  fill: var(--google-gray-50);
+}
+
+/* Rainbow colors - use Google brand colors in sequence */
+.rainbow-path-1 { fill: var(--google-blue) !important; }
+.rainbow-path-2 { fill: var(--google-red) !important; }
+.rainbow-path-3 { fill: var(--google-yellow) !important; }
+.rainbow-path-4 { fill: var(--google-green) !important; }
+
+/* ========================================================================================= 
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================================= */
+
+@media screen and (max-width: 991px) {
+  /* Maintain readability on tablets */
+  body {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  /* Slightly increase font weight on mobile for better readability */
+  body {
+    font-weight: 400;
+  }
+  
+  h1, .h1, .welcome__h1 {
+    font-weight: 700;
+  }
+}

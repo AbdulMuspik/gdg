@@ -1,0 +1,212 @@
+/* Custom styles for Members page */
+
+/* Members page header section */
+.members-page-header {
+  max-width: 600px;
+  margin: 0 auto 3em;
+  text-align: center;
+}
+
+.members-page-header .speakers__text {
+  width: 100%;
+}
+
+.members-page-header .speakers__h2 {
+  margin-bottom: 0.5em;
+}
+
+.members-page-header .speakers__p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+/* Ensure proper spacing for members page */
+.speakers__view-all {
+  text-align: center;
+  margin-top: 4em;
+  padding-bottom: 4em;
+}
+
+/* Members page specific adjustments */
+body[data-barba-namespace="members"] .speakers {
+  padding-top: 4em;
+}
+
+/* Ensure all member cards are visible on members page */
+body[data-barba-namespace="members"] .speakers__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5em;
+}
+
+/* Responsive adjustments for members page */
+@media screen and (max-width: 991px) {
+  body[data-barba-namespace="members"] .speakers__col {
+    width: calc(49.995% - 1.875em);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body[data-barba-namespace="members"] .speakers__col {
+    width: 100%;
+  }
+  
+  .members-page-header {
+    margin-bottom: 2em;
+  }
+}
+
+/* Footer styling for members page */
+.footer {
+  background-color: var(--color-light);
+  padding: 4em 0 2em;
+  margin-top: 4em;
+}
+
+.footer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2em;
+  margin-bottom: 3em;
+}
+
+.footer__col-left,
+.footer__col-right {
+  flex: 1;
+}
+
+.footer__col-center {
+  flex: 2;
+  text-align: center;
+}
+
+.footer__h2 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.footer__p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.footer__left-image,
+.footer__right-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.footer__bottom {
+  text-align: center;
+  padding-top: 2em;
+  border-top: 2px solid var(--color-dark);
+}
+
+.footer__bottom-p {
+  opacity: 0.6;
+  font-size: 0.9em;
+}
+
+@media screen and (max-width: 767px) {
+  .footer__row {
+    flex-direction: column;
+  }
+  
+  .footer__col-left,
+  .footer__col-right {
+    display: none;
+  }
+  
+  .footer__h2 {
+    font-size: 1.8em;
+  }
+}
+
+/* Filter Bar Styles */
+.members-filter-bar {
+  width: 100%;
+  padding: 2em 0 3em;
+  margin: 0 auto;
+}
+
+.members-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+/* Filter Button Styles */
+.members-filter-btn {
+  padding: 0.7em 1.4em;
+  min-height: 44px;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 2em;
+  font-family: Quicksand, Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.members-filter-btn:hover {
+  background-color: #4285F4;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.members-filter-btn:focus {
+  outline: 2px solid #4285F4;
+  outline-offset: 2px;
+}
+
+.members-filter-btn.is--active {
+  background-color: #4285F4;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* Responsive Styles for Filter Bar */
+@media screen and (max-width: 767px) {
+  .members-filter-bar {
+    padding: 1.5em 0 2em;
+  }
+  
+  .members-filter-buttons {
+    gap: 0.6em;
+    padding: 0 0.5em;
+  }
+  
+  .members-filter-btn {
+    padding: 0.6em 1.2em;
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .members-filter-buttons {
+    gap: 0.75em;
+  }
+  
+  .members-filter-btn {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .members-filter-buttons {
+    gap: 1em;
+  }
+}
