@@ -7,24 +7,45 @@ import "./script.js";
 function waitForLibraries(callback, attempts = 0, maxAttempts = 300) {
   const gsapReady = typeof gsap !== 'undefined';
   const scrollTriggerReady = typeof ScrollTrigger !== 'undefined';
+  // CustomEase is optional/premium, so we don't block on it, but we check it for logging
   const customEaseReady = typeof CustomEase !== 'undefined';
   
   if (attempts === 0) {
-    console.log('[Waiting for libraries...] gsap:', gsapReady, 'ScrollTrigger:', scrollTriggerReady, 'CustomEase:', customEaseReady);
+    console.log('[Waiting for libraries...] gsap:', gsapReady, 'ScrollTrigger:', scrollTriggerReady);
   }
   
-  if (gsapReady && scrollTriggerReady && customEaseReady) {
+  if (gsapReady && scrollTriggerReady) {
     console.log('[Libraries loaded successfully after', attempts, 'attempts]');
     callback();
   } else if (attempts < maxAttempts) {
     setTimeout(() => waitForLibraries(callback, attempts + 1, maxAttempts), 50);
   } else {
-    console.error('CDN libraries failed to load after', maxAttempts * 50, 'ms. gsap:', gsapReady, 'ScrollTrigger:', scrollTriggerReady, 'CustomEase:', customEaseReady);
+    console.error('CDN libraries failed to load after', maxAttempts * 50, 'ms. gsap:', gsapReady, 'ScrollTrigger:', scrollTriggerReady);
+    // Force hide loader so user isn't stuck
+    const loader = document.querySelector('.loading-screen');
+    if (loader) {
+      loader.style.opacity = '0';
+      loader.style.pointerEvents = 'none';
+    }
+    const main = document.querySelector('main');
+    if (main) {
+        main.style.opacity = '1';
+        main.style.visibility = 'visible';
+    }
   }
 }
 
 waitForLibraries(() => {
-  gsap.registerPlugin(ScrollTrigger, CustomEase, DrawSVGPlugin, TextPlugin, Draggable);
+  // Safely register plugins
+  const plugins = [ScrollTrigger];
+  if (typeof CustomEase !== 'undefined') plugins.push(CustomEase);
+  if (typeof DrawSVGPlugin !== 'undefined') plugins.push(DrawSVGPlugin);
+  if (typeof TextPlugin !== 'undefined') plugins.push(TextPlugin);
+  if (typeof Draggable !== 'undefined') plugins.push(Draggable);
+  
+  gsap.registerPlugin(...plugins);
+
+  console.log('[Main] Plugins registered:', plugins.map(p => p ? p.name || 'Unknown' : 'Unknown'));
 
   let loader = true;
   let lenis;
@@ -34,8 +55,13 @@ waitForLibraries(() => {
   const _sunTransformEl = document.querySelector('.welcome-sun__transform .chat-cloud__p');
   const sunTransformText = _sunTransformEl ? (_sunTransformEl.textContent || '').trim() : '';
 
-  CustomEase.create("cubic-default", "0.625, 0.05, 0, 1");
-  gsap.defaults({ease: "cubic-default", duration: durationDefault});
+  if (typeof CustomEase !== 'undefined') {
+    CustomEase.create("cubic-default", "0.625, 0.05, 0, 1");
+    gsap.defaults({ease: "cubic-default", duration: durationDefault});
+  } else {
+    console.warn('[Main] CustomEase not found, falling back to standard ease');
+    gsap.defaults({ease: "power2.out", duration: durationDefault});
+  }
 
   initPageTransitions();
 
@@ -82,10 +108,8 @@ function initLoaderShort() {
   
   var tl = gsap.timeline();
   
-  tl.call(function () {
-    lenis.stop();
-  }, null, 0);
-
+  // Don't stop lenis for members page - let it scroll immediately
+  
   tl.call(function () {
     pageTransitionOut();
     rainbowsScrolltrigger();
@@ -277,6 +301,58 @@ function initPageTransitions() {
       }
     },
     transitions: [{
+      name: 'members',
+      from: {
+        namespace: ['members']
+      },
+      once(data) {
+        console.log('[Members Page] Initializing without Lenis smooth scroll');
+        document.fonts.ready.then(function () {
+          // Don't initialize Lenis for members page - use native scroll
+          initScript();
+          
+          // Remove any Lenis classes and ensure members-page class
+          document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
+          document.documentElement.classList.add('members-page');
+          document.body.classList.add('members-page');
+          
+          // Force native scroll styles
+          document.documentElement.style.overflow = 'auto';
+          document.documentElement.style.height = 'auto';
+          document.body.style.overflow = 'auto';
+          document.body.style.height = 'auto';
+          
+          const mainWrap = document.querySelector('.main-wrap');
+          if (mainWrap) {
+            mainWrap.style.overflow = 'visible';
+            mainWrap.style.height = 'auto';
+          }
+          
+          // Hide loading screen
+          gsap.set(document.querySelector('.loading-screen'), {
+            autoAlpha: 0,
+          });
+          
+          console.log('[Members Page] Initialization complete - native scrolling enabled');
+        });
+      },
+      async leave(data) {
+        await commonLeaveBeforeOffset(data);
+        await delay(transitionOffset);
+        await commonLeaveAfterOffset(data);
+      },
+      async enter(data) {
+        await commonEnter(data);
+      },
+      async beforeEnter(data) {
+        // Skip Lenis initialization for members page - use native scroll
+        ScrollTrigger.getAll().forEach(t => t.kill());
+        initScript();
+      },
+      async afterEnter(data) {
+        await commonAfterEnter(data);
+      }
+    }, {
       name: 'self',
       async leave(data) {
         await commonLeaveBeforeOffset(data);
@@ -342,6 +418,15 @@ function initPageTransitions() {
 
 function initLenis() {
 
+  // Check if we're on members page - skip Lenis initialization
+  const mainElement = document.querySelector('main[data-barba-namespace="members"]');
+  if (mainElement) {
+    console.log('[Lenis] Skipping initialization for members page');
+    return;
+  }
+
+  console.log('[Lenis] Initializing smooth scroll');
+
   // Lenis: https://github.com/studio-freight/lenis
   lenis = new Lenis({
     // duration: 1,
@@ -357,6 +442,10 @@ function initLenis() {
 
   gsap.ticker.lagSmoothing(0);
   
+  // Add Lenis classes to html for proper styling
+  document.documentElement.classList.add('lenis', 'lenis-smooth');
+  
+  console.log('[Lenis] Initialization complete');
 }
 
 // Don't touch
@@ -373,6 +462,7 @@ function delay(n) {
  * Fire all scripts on page load
  */
 function initScript() {
+  console.log('[Main] initScript starting...');
   initCheckWindowHeight();
   initBasicFunctions();
   initStackedCardsDrag();
@@ -569,6 +659,11 @@ function initBasicFunctions() {
  * Stacked Cards with Drag
  */
 function initStackedCardsDrag() {
+  if (typeof Draggable === 'undefined') {
+    console.warn('[Main] Draggable not found, skipping stacked cards init');
+    return;
+  }
+
   document.querySelectorAll('[data-stacked-cards]').forEach(function(container) {
 
     // animation presets
@@ -816,11 +911,15 @@ function initLenisCheckScrollUpDown() {
   };
 
   function startCheckScroll() {
-    lenis.on('scroll', scrollHandler);
+    if (lenis) {
+      lenis.on('scroll', scrollHandler);
+    }
   }
 
   function stopCheckScroll() {
-    lenis.off('scroll', scrollHandler);
+    if (lenis) {
+      lenis.off('scroll', scrollHandler);
+    }
   }
 
   // Initialize the scroll check
@@ -1091,6 +1190,10 @@ function initMembersFilter() {
       currentFilter = category;
     });
   });
+  
+  // Initialize default filter (all)
+  applyFilter(currentFilter);
+  updateButtonStates(document.querySelector('[data-filter-category="all"]'));
   
   console.log('[initMembersFilter] Event listeners attached successfully');
   
